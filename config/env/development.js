@@ -12,7 +12,10 @@ module.exports = {
   mongoose: {
     debug: false
   },
-  hostname: 'http://192.168.0.18:3017',
+  http: {
+    port: 3017
+  },
+  hostname: '0.0.0.0',
   app: {
     name: 'MEAN - A Modern Stack - Development'
   },
@@ -24,31 +27,31 @@ module.exports = {
     facebook: {
       clientID: 'DEFAULT_APP_ID',
       clientSecret: 'APP_SECRET',
-      callbackURL: 'http://192.168.0.18:3017/api/auth/facebook/callback',
+      callbackURL: 'http://localhost:3017/api/auth/facebook/callback',
       enabled: false
     },
     twitter: {
       clientID: 'DEFAULT_CONSUMER_KEY',
       clientSecret: 'CONSUMER_SECRET',
-      callbackURL: 'http://192.168.0.18:3017/api/auth/twitter/callback',
+      callbackURL: 'http://localhost:3017/api/auth/twitter/callback',
       enabled: false
     },
     github: {
       clientID: 'DEFAULT_APP_ID',
       clientSecret: 'APP_SECRET',
-      callbackURL: 'http://192.168.0.18:3017/api/auth/github/callback',
+      callbackURL: 'http://localhost:3017/api/auth/github/callback',
       enabled: false
     },
     google: {
       clientID: 'DEFAULT_APP_ID',
       clientSecret: 'APP_SECRET',
-      callbackURL: 'http://192.168.0.18:3017/api/auth/google/callback',
+      callbackURL: 'http://localhost:3017/api/auth/google/callback',
       enabled: false
     },
     linkedin: {
       clientID: 'DEFAULT_API_KEY',
       clientSecret: 'SECRET_KEY',
-      callbackURL: 'http://192.168.0.18:3017/api/auth/linkedin/callback',
+      callbackURL: 'http://localhost:3017/api/auth/linkedin/callback',
       enabled: false
     }
   },
