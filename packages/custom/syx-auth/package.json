@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Rklick"
+  },
+  "bugs": {
+    "url": "https://github.com/rjVapes/meanio-users/issues"
+  },
+  "dependencies": {
+    "passport-facebook": "latest",
+    "passport-github": "latest",
+    "passport-google-oauth": "latest",
+    "passport-linkedin": "latest",
+    "passport-local": "latest",
+    "passport-twitter": "latest",
+    "nodemailer": "latest",
+    "meanio-circles": "^0.1.x",
+    "angular-jwt" : "latest"
+  },
+  "description": "Auth package",
+  "devDependencies": {},
+  "engines": {
+    "node": "4.2.x",
+    "npm": "3.x"
+  },
+  "license": "MIT",
+  "mean": "0.6.x",
+  "name": "mean-users",
+  "optionalDependencies": {},
+  "readmeFilename": "README.md",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "version": "0.0.1"
+}
