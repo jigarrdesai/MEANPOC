@@ -50,7 +50,10 @@ module.exports = function(MeanUser) {
 
 			User.findOne({
 				email: email
-			}, function (err, user) {
+			})
+			.populate('admin')
+			.populate('tenant')
+			.exec(function (err, user) {
 				if(err) {
 					// return done(err);
 					return res.status(400).json([{
@@ -78,14 +81,13 @@ module.exports = function(MeanUser) {
                 escaped = encodeURI(escaped);
 				var token = jwt.sign(escaped, config.secret);
 
-				res.status(200).json({
-					user: {
-						token: token,
-						id: user.id,
-						type: user.type,
-						parent: user.parent
-					}
-				});
+				var resData = {
+					user: user
+				};
+				resData.user.id = user.id;
+				delete resData.user._id;
+
+				res.status(200).json(resData);
 			});
         },
 

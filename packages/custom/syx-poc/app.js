@@ -13,12 +13,14 @@ var MeanStarter = new Module('meanStarter');
  */
 MeanStarter.register(function(app, auth, database, users, system) {
 
+  // MeanStarter.aggregateAsset('js','ngStorage.js');
+
   // Set views path, template engine and default layout
   app.set('views', __dirname + '/server/views');
 
   MeanStarter.routes(app, auth, database);
 
-  MeanStarter.angularDependencies(['mean.system']);
+  MeanStarter.angularDependencies(['mean.system', 'ngStorage']);
 
   return MeanStarter;
 });

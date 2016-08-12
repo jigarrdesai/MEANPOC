@@ -1,16 +1,12 @@
 (function() {
-  'use strict';
+  	'use strict';
 
-  angular.module('mean.meanStarter')
-    .controller('StarterController', StarterController);
-
-  StarterController.$inject = ['$scope', 'Global'];
-
-  function StarterController($scope, Global) {
-    // Original scaffolded code.
-    $scope.global = Global;
-    $scope.package = {
-      name: 'meanStarter'
-    };
-  }
+  	angular.module('mean.meanStarter').controller('StarterController', ['$scope', '$rootScope', 'Global', '$localStorage', function($scope, $rootScope, Global, $localStorage) {
+		
+		console.log($rootScope);
+		// Original scaffolded code.
+		
+		$scope.global = Global;
+		$rootScope.$storage = $localStorage;
+  	}]);
 })();
