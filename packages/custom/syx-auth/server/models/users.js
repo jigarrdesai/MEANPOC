@@ -67,7 +67,12 @@ var UserSchema = new Schema({
     required: true,
     default: 'user'
   },
-  parent: {
+  tenant: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    default: null
+  },
+  admin: {
     type: Schema.Types.ObjectId,
     required: false,
     default: null

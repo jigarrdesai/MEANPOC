@@ -297,7 +297,10 @@ module.exports = function(MeanUser) {
 
             User.findOne({
                 _id: id
-            }).exec(function(err, user) {
+            })
+			.populate('tenant')
+			.populate('admin')
+			.exec(function(err, user) {
                 if(err) {
 					if(err.kind == 'ObjectId') {
 						return res.status(400).json([{
@@ -480,6 +483,13 @@ module.exports = function(MeanUser) {
 					$ne: current.id
 				}
 			};
+
+			if(current.type == 'admin') {
+				where.admin = current.id;
+				where.tenant = current.tenant._id;
+			} else if(current.type == 'tenant') {
+				where.tenant = current.id;
+			}
 
 			User.count(where, function(err, count) {
 
