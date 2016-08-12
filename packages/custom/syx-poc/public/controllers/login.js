@@ -1,9 +1,8 @@
 (function() {
     'use strict';
-    angular.module('mean.meanStarter').controller('POCLoginCtrl', ['$scope', 'Global', '$localStorage', 'User', function($scope, Global, $localStorage, User) {
+    angular.module('mean.meanStarter').controller('POCLoginCtrl', ['$scope', '$state', '$localStorage', 'User', function($scope, $state, $localStorage, User) {
         // Original scaffolded code.
 
-        $scope.global = Global;
         $scope.forms = {};
         $scope.user = {};
         $scope.input = {
@@ -27,6 +26,9 @@
                 User.login($scope.user, function(data) {
                     $localStorage.current = data.user;
                     $localStorage.current.id = data.user._id;
+
+                    $state.go('home');
+                    
                 }, function(errList) {
                     console.log(errList)
                 });

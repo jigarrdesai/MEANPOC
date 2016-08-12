@@ -98,7 +98,7 @@ module.exports = function(MeanUser) {
 
 			var current = req.body.current;
 
-			if(!current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -329,7 +329,7 @@ module.exports = function(MeanUser) {
 
 			var current = req.body.current;
 
-			if(!current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -425,7 +425,7 @@ module.exports = function(MeanUser) {
 		deleteSingle: function(req, res, next) {
 			var current = req.body.current;
 
-			if(!current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -470,7 +470,7 @@ module.exports = function(MeanUser) {
             
 			var current = req.body.current;
 
-			if(!current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null

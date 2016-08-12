@@ -1,0 +1,27 @@
+<div class="bs-example" data-example-id="hoverable-table">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <th scope="row">{{$index + 1}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.type}}</td>
+                <td>
+                    <a ui-sref="editUser({id: item.id})">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div uib-pagination boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" total-items="totalItems" max-size="5" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></div>
