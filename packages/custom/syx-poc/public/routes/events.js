@@ -14,5 +14,13 @@ angular.module('mean.meanStarter').config(['$meanStateProvider', function($meanS
 			url: '/add-event',
 			templateUrl: 'meanStarter/views/events/edit.html',
 			controller: 'POCEditEventCtrl'
+		})
+		.state('editEvent', {
+			url: '/edit-event/:id',
+			params: {
+				id: null
+			},
+			templateUrl: 'meanStarter/views/events/edit.html',
+			controller: 'POCEditEventCtrl'
 		});
 }]);

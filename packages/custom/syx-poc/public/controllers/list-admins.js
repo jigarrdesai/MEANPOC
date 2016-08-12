@@ -1,9 +1,9 @@
 (function() {
   	'use strict';
 
-  	angular.module('mean.meanStarter').controller('POCEventsCtrl', ['$scope', '$rootScope', '$localStorage', 'Event', function($scope, $rootScope, $localStorage, Event) {
+  	angular.module('mean.meanStarter').controller('POCAdminsCtrl', ['$scope', '$rootScope', '$localStorage', 'User', function($scope, $rootScope, $localStorage, User) {
 		
-		$scope.type = 'Event';
+		$scope.type = 'Admin';
 		$scope.totalItems = 0;
 		$scope.fromItems = 0;
 		$scope.toItems = 0;
@@ -25,7 +25,7 @@
 
 			$scope.fetchingData = true;
 
-			Event.list(request, function(data) {
+			User.listAdmin(request, function(data) {
 				
 				$scope.fetchingData = false;
 

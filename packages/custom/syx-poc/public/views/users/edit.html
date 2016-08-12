@@ -1,0 +1,56 @@
+<h2>{{type}}</h2>
+<form name="forms.saveUser" class="form-horizontal" role="form" ng-submit="saveUser()">
+    <div class="alert alert-success" ng-show="successMessage">{{successMessage}}</div>
+    <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+    <div class="form-group" ng-if="$storage.current.type == 'super' && type == 'Admin' && !editMode">
+        <label class="control-label col-sm-2" for="tenant">Tenant:</label>
+        <div class="col-sm-10">
+            <select class="form-control" ng-model="user.tenant" id="tenant" placeholder="Select Tenant" required>
+                <option value="{{tenant._id}}" ng-repeat="tenant in tenants">{{tenant.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="user.name" id="name" placeholder="Enter Name" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" ng-model="user.email" id="email" placeholder="Enter email" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="username">Username:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="user.username" id="username" placeholder="Enter Username" required />
+        </div>
+    </div>
+    <!-- <div class="form-group">
+        <label class="control-label col-sm-2" for="type">Type:</label>
+        <div class="col-sm-10">
+            <select class="form-control" ng-model="user.type" id="type" placeholder="Select Type" required>
+                <option value="{{type.value}}" ng-repeat="type in types">{{type.label}}</option>
+            </select>
+        </div>
+    </div> -->
+    <div class="form-group" ng-hide="editMode">
+        <label class="control-label col-sm-2" for="password">Password:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" ng-model="user.password" id="password" placeholder="Enter password"/>
+        </div>
+    </div>
+    <div class="form-group" ng-hide="editMode">
+        <label class="control-label col-sm-2" for="confirmPassword">Repeat Password:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" ng-model="user.confirmPassword" id="confirmPassword" placeholder="Enter password again" ng-required="user.password" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>

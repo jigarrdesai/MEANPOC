@@ -17,6 +17,9 @@ module.exports = function(SyxAuth, app, auth, database, passport) {
   	app.route('/api/user/updateSingle/:id').post(users.updateSingle); // Requires Role
 
   	app.route('/api/user/list').post(users.list); // Requires Roles
+  	app.route('/api/user/listAdmin').post(users.list); // Requires Roles
+  	app.route('/api/user/listTenant').post(users.list); // Requires Roles
+
 	app.route('/api/user/create').post(users.create); // Requires Roles
 	
   	// if(config.strategies.local.enabled) {

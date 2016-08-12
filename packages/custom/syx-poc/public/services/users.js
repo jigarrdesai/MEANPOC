@@ -5,15 +5,41 @@ angular.module('mean.meanStarter').factory('User', [ '$http', '$resource', funct
     var rootURL = '/api/user';
 
     return $resource('', {
-        id: '@id'
+        id: '@id',
+        _id: '@_id'
     }, {
         login: {
             url: rootURL + '/login',
             method: 'POST',
             isArray: false
         },
+        single: {
+            url: rootURL + '/single/:id',
+            method: 'GET',
+            isArray: false
+        },
+        singleAdmin: {
+            url: rootURL + '/singleAdmin/:id',
+            method: 'GET',
+            isArray: false
+        },
+        singleTenant: {
+            url: rootURL + '/singleTenant/:id',
+            method: 'GET',
+            isArray: false
+        },
         list: {
             url: rootURL + '/list',
+            method: 'POST',
+            isArray: false
+        },
+        listAdmin: {
+            url: rootURL + '/listAdmin',
+            method: 'POST',
+            isArray: false
+        },
+        listTenant: {
+            url: rootURL + '/listTenant',
             method: 'POST',
             isArray: false
         },
@@ -23,7 +49,7 @@ angular.module('mean.meanStarter').factory('User', [ '$http', '$resource', funct
             isArray: false
         },
         update: {
-            url: rootURL + '/updateSingle/:id',
+            url: rootURL + '/updateSingle/:_id',
             method: 'POST',
             isArray: false
         }

@@ -27,7 +27,7 @@ function sendMail(mailOptions) {
 }
 
 function hasCreateAccess(current, type) {
-	return usersWithCreateAccess.indexOf(current) < usersWithCreateAccess.indexOf(type);
+	return (usersWithCreateAccess.indexOf(current) < usersWithCreateAccess.indexOf(type)) || (current == 'admin' && type == 'user');
 }
 
 module.exports = function(MeanUser) {
@@ -126,6 +126,12 @@ module.exports = function(MeanUser) {
 			}
 
 			user.parent = current.id;
+
+			if(current.type == 'admin' && req.body.type == 'user') {
+				user.admin = current.id;
+				user.tenant = current.tenant._id;
+			}
+
 			user.save(function(err) {
 				if (err) {
 					switch (err.code) {
@@ -491,6 +497,14 @@ module.exports = function(MeanUser) {
 				where.tenant = current.tenant._id;
 			} else if(current.type == 'tenant') {
 				where.tenant = current.id;
+			}
+
+			if(req.url.indexOf('Admin') > -1) {
+				where.type = 'admin';
+			} else if(req.url.indexOf('Tenant') > -1) {
+				where.type = 'tenant';
+			} else {
+				where.type = 'user';
 			}
 
 			User.count(where, function(err, count) {

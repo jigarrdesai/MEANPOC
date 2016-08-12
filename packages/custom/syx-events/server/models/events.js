@@ -9,14 +9,6 @@ var mongoose  = require('mongoose'),
   _   = require('lodash');
 
 /**
- * Validations
- */
-var validatePresenceOf = function(value) {
-  // If you are authenticating by any of the oauth strategies, don't validate.
-  return (this.provider && this.provider !== 'local') || (value && value.length);
-};
-
-/**
  * Getter
  */
 var escapeProperty = function(value) {
@@ -35,7 +27,6 @@ var EventSchema = new Schema({
   },
   venue: {
     type: String,
-    unique: true,
     required: false,
     get: escapeProperty
   },
@@ -80,8 +71,6 @@ var EventSchema = new Schema({
  */
 EventSchema.methods.toJSON = function() {
   var obj = this.toObject();
-  delete obj.hashed_password;
-  delete obj.salt;
   return obj;
 };
 

@@ -3,7 +3,7 @@
 
   	angular.module('mean.meanStarter').controller('POCUsersCtrl', ['$scope', '$rootScope', '$localStorage', 'User', function($scope, $rootScope, $localStorage, User) {
 		
-
+		$scope.type = 'User';
 		$scope.totalItems = 0;
 		$scope.fromItems = 0;
 		$scope.toItems = 0;

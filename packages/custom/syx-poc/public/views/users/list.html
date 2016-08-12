@@ -1,3 +1,4 @@
+<h2>{{type}}</h2>
 <div class="bs-example" data-example-id="hoverable-table">
     <table class="table table-hover">
         <thead>
@@ -18,7 +19,7 @@
                 <td>{{item.email}}</td>
                 <td>{{item.type}}</td>
                 <td>
-                    <a ui-sref="editUser({id: item.id})">Edit</a>
+                    <a ui-sref="edit{{type}}({id: item._id})" data-id="{{item._id}}">Edit</a>
                 </td>
             </tr>
         </tbody>

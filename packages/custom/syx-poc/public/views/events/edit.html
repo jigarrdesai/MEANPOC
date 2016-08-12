@@ -1,0 +1,52 @@
+<h2>Event</h2>
+<form name="forms.saveEvent" class="form-horizontal" role="form" ng-submit="saveEvent()">
+    <div class="alert alert-success" ng-show="successMessage">{{successMessage}}</div>
+    <div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Event Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="event.name" id="name" placeholder="Enter Name" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="description">Event Description:</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" ng-model="event.description" id="description" placeholder="Enter description" required ></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="price">Event Price:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" ng-model="event.price" id="price" placeholder="Enter price" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="venue">Event Venue:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="event.venue" id="venue" placeholder="Enter venue" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="start">Start Date/Time:</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" ng-model="event.start" id="start" placeholder="Enter Start Date" required />
+        </div>
+        <div class="col-sm-5">
+            <input type="time" class="form-control" ng-model="event.start" id="start2" placeholder="Enter Start Time" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="end">End Date/Time:</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" ng-model="event.end" id="end" placeholder="Enter End Date" required />
+        </div>
+        <div class="col-sm-5">
+            <input type="time" class="form-control" ng-model="event.end" id="end" placeholder="Enter End Time" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
