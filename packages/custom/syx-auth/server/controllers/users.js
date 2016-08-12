@@ -27,7 +27,7 @@ function sendMail(mailOptions) {
 }
 
 function hasCreateAccess(current, type) {
-	return (usersWithCreateAccess.indexOf(current) < usersWithCreateAccess.indexOf(type)) || (current == 'admin' && type == 'user');
+	return (usersWithCreateAccess.indexOf(current) < usersWithCreateAccess.indexOf(type)) || (current == 'admin' && type == 'user') || (current == 'admin' && type == 'admin');
 }
 
 module.exports = function(MeanUser) {
@@ -285,7 +285,7 @@ module.exports = function(MeanUser) {
 				}
 
 				return res.status(200).json({
-					user: user.toJSON()
+					user: user
 				});
             });
         },

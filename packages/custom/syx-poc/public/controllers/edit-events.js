@@ -49,5 +49,17 @@
 				});
 			}
 		};
+
+		$scope.$watch('event.start', function(newVal) {
+			if(newVal && typeof newVal == 'string') {
+				$scope.event.start = new Date(newVal);
+			}
+		});
+
+		$scope.$watch('event.end', function(newVal) {
+			if(newVal && typeof newVal == 'string') {
+				$scope.event.end = new Date(newVal);
+			}
+		});
   	}]);
 })();

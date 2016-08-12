@@ -4,6 +4,7 @@
   	angular.module('mean.meanStarter').controller('POCEditAdminCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$localStorage', 'User', function($scope, $rootScope, $state, $stateParams, $localStorage, User) {
 		
 		$scope.type = 'Admin';
+		$scope.tenants = [];
 		$scope.user = {};
 		$scope.user.type = 'admin';
 		$scope.user.admin = null;
@@ -36,6 +37,20 @@
 			} else {
 				$state.go('admins');
 			}
+		} else {
+			User.listTenant({
+				current: $localStorage.current,
+				skip: 0,
+				limit: 100
+			}, function(data) {
+				if(data.count > 0) {
+					$scope.tenants = data.list;
+				} else {
+					$scope.errorMessage = 'Can not create Admin User, Please Create Tenant first.';
+				}
+			}, function() {
+				$scope.errorMessage = 'Can not create Admin User, Please reload the page.';
+			})
 		}
 
 		$scope.saveUser = function() {

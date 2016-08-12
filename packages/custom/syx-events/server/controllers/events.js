@@ -141,7 +141,7 @@ module.exports = function(SyxEvent) {
 				}
 
 				return res.status(200).json({
-					event: event.toJSON()
+					event: event
 				});
             });
         },
@@ -167,11 +167,7 @@ module.exports = function(SyxEvent) {
 			req.assert('end', 'You must enter valid start date').notEmpty();
 			req.assert('price', 'Enter valid amount').notEmpty();
 
-			if(current.type == 'admin') {
-				event.admin = current.id;
-				event.tenant = current.tenant._id;
-			} else if(current.type == 'tenant') {
-				event.tenant = current.id;
+			if(current.type == 'tenant') {
 
 				req.assert('admin', 'Select Proper admin').notEmpty();
 			} else {
@@ -209,14 +205,19 @@ module.exports = function(SyxEvent) {
 					}]);
 				}
 
+				if(current.type == 'admin') {
+					event.admin = current.id;
+					event.tenant = current.tenant._id;
+				} else if(current.type == 'tenant') {
+					event.tenant = current.id;
+				}
+
 				event.name = req.body.name;
 				event.venue = req.body.venue;
 				event.description = req.body.description;
 				event.start = req.body.start;
 				event.end = req.body.end;
 				event.price = req.body.price;
-				event.admin = req.body.admin;
-				event.tenant = req.body.tenant;
 				
 				event.save(function(err) {
 					if (err) {
