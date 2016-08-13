@@ -22,10 +22,10 @@
                             <li><a href="#" ui-sref="createTenant">Create Tenant</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown" uib-dropdown ng-if="$storage.current.type == 'super' || $storage.current.type == 'admin'">
+                    <li class="dropdown" uib-dropdown ng-if="$storage.current.type == 'super' || $storage.current.type == 'tenant' || $storage.current.type == 'admin'">
                         <a href="#" uib-dropdown-toggle class="dropdown-toggle">Admins</a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
-                            <li><a href="#" ui-sref="admins">List</a></li>
+                            <li><a href="#" ui-sref="admins" ng-if="$storage.current.type != 'admin'">List</a></li>
                             <li><a href="#" ui-sref="createAdmin">Create Admin</a></li>
                         </ul>
                     </li>

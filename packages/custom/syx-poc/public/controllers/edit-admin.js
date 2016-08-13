@@ -38,19 +38,25 @@
 				$state.go('admins');
 			}
 		} else {
-			User.listTenant({
-				current: $localStorage.current,
-				skip: 0,
-				limit: 100
-			}, function(data) {
-				if(data.count > 0) {
-					$scope.tenants = data.list;
-				} else {
-					$scope.errorMessage = 'Can not create Admin User, Please Create Tenant first.';
-				}
-			}, function() {
-				$scope.errorMessage = 'Can not create Admin User, Please reload the page.';
-			})
+			if($localStorage.current.type == 'super') {
+				User.listTenant({
+					current: $localStorage.current,
+					skip: 0,
+					limit: 100
+				}, function(data) {
+					if(data.count > 0) {
+						$scope.tenants = data.list;
+					} else {
+						$scope.errorMessage = 'Can not create Admin User, Please Create Tenant first.';
+					}
+				}, function() {
+					$scope.errorMessage = 'Can not create Admin User, Please reload the page.';
+				})
+			} else if($localStorage.current.type == 'tenant') {
+				$scope.user.tenant = $localStorage.current._id;
+			} else if($localStorage.current.type == 'admin') {
+				$scope.user.tenant = $localStorage.current.tenant._id;
+			}
 		}
 
 		$scope.saveUser = function() {
