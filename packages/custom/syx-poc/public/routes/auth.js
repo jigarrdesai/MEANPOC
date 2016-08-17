@@ -14,5 +14,11 @@ angular.module('mean.meanStarter').config(['$meanStateProvider', function($meanS
 			url: '/login',
 			templateUrl: 'meanStarter/views/auth/login.html',
 			controller: 'POCLoginCtrl'
-		});
+		})
+		.state('auth.register', {
+			url: '/register',
+			templateUrl: 'meanStarter/views/auth/register.html',
+			controller: 'POCRegisterCtrl'
+		})
+	;
 }]);

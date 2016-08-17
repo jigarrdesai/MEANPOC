@@ -43,6 +43,11 @@ angular.module('mean.meanStarter').factory('User', [ '$http', '$resource', funct
             method: 'POST',
             isArray: false
         },
+        registerTenant: {
+            url: rootURL + '/registerTenant',
+            method: 'POST',
+            isArray: false
+        },
         create: {
             url: rootURL + '/create',
             method: 'POST',

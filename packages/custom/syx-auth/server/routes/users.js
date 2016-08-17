@@ -21,6 +21,8 @@ module.exports = function(SyxAuth, app, auth, database, passport) {
   	app.route('/api/user/listTenant').post(users.list); // Requires Roles
 
 	app.route('/api/user/create').post(users.create); // Requires Roles
+
+	app.route('/api/user/registerTenant').post(users.createTenant);
 	
   	// if(config.strategies.local.enabled) {
 		

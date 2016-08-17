@@ -256,6 +256,69 @@ module.exports = function(MeanUser) {
 			});
 		},
 
+		 /**
+         * Create Super user
+         */
+		createTenant: function(req, res) {
+			var tenant = new User(req.body);
+
+			tenant.type = 'tenant';
+
+			// because we set our tenant.provider to local our models/tenant.js validation will always be true
+			req.assert('name', 'You must enter a name').notEmpty();
+			req.assert('email', 'You must enter a valid email address').isEmail();
+			req.assert('password', 'Password must be between 8-20 characters long').len(8, 20);
+			req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+
+			var errors = req.validationErrors();
+			if (errors) {
+				return res.status(400).send(errors);
+			}
+
+			tenant.save(function(err) {
+				if (err) {
+					switch (err.code) {
+						case 11000:
+						case 11001:
+							res.status(400).json([{
+								msg: 'Username already taken',
+								param: 'username'
+							}]);
+							break;
+						default:
+							var modelErrors = [];
+
+							if (err.errors) {
+
+								for (var x in err.errors) {
+									modelErrors.push({
+										param: x,
+										msg: err.errors[x].message,
+										value: err.errors[x].value
+									});
+								}
+
+								res.status(400).json(modelErrors);
+							}
+					}
+					return res.status(400);
+				}
+
+				var admin = new User({
+					name: tenant.name + '\'s Admin',
+					email: 'adminof' + tenant.email,
+					password: req.body.password,
+					type: 'admin',
+					tenant: tenant.id
+				});
+				admin.save();
+
+				return res.status(200).json({
+					id: tenant.id
+				});
+			});
+		},
+
         /**
          * Send Current User (For future purpose)
          */
