@@ -48,18 +48,6 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       this.resetpassworderror = null;
       this.validationError = null;
       self = this;
-      $http.get('/api/users/me').success(function(response) {
-        if(!response && $cookies.get('token') && $cookies.get('redirect')) {
-          self.onIdentity.bind(self)({
-            token: $cookies.get('token'),
-            redirect: $cookies.get('redirect').replace(/^"|"$/g, '')
-          });
-          $cookies.remove('token');
-          $cookies.remove('redirect');
-        } else {
-          self.onIdentity.bind(self)(response);
-        }
-      });
     }
 
     MeanUserKlass.prototype.onIdentity = function(response) {
