@@ -9,20 +9,20 @@ module.exports = function(SyxAuth, app, auth, database, passport) {
 
   	// app.use(users.loadUser);
 
-  	app.route('/api/user/me').post(users.me); // Requires Role
+  	app.route('/api/user/me').post(users.common); // Requires Role
 
-  	app.route('/api/user/single/:id').get(users.single); // Everyone can access
+  	app.route('/api/user/single/:id').get(users.common); // Everyone can access
 
-  	app.route('/api/user/deleteSingle/:id').delete(users.deleteSingle); // Requires Roles
-  	app.route('/api/user/updateSingle/:id').post(users.updateSingle); // Requires Role
+  	app.route('/api/user/deleteSingle/:id').delete(users.common); // Requires Roles
+  	app.route('/api/user/updateSingle/:id').post(users.common); // Requires Role
 
-  	app.route('/api/user/list').post(users.list); // Requires Roles
-  	app.route('/api/user/listAdmin').post(users.list); // Requires Roles
-  	app.route('/api/user/listTenant').post(users.list); // Requires Roles
+  	app.route('/api/user/list').post(users.common); // Requires Roles
+  	app.route('/api/user/listAdmin').post(users.common); // Requires Roles
+  	app.route('/api/user/listTenant').post(users.common); // Requires Roles
 
-	app.route('/api/user/create').post(users.create); // Requires Roles
+	app.route('/api/user/create').post(users.common); // Requires Roles
 
-	app.route('/api/user/registerTenant').post(users.createTenant);
+	app.route('/api/user/registerTenant').post(users.common);
 	
   	// if(config.strategies.local.enabled) {
 		
@@ -33,7 +33,7 @@ module.exports = function(SyxAuth, app, auth, database, passport) {
 		//   .post(users.resetpassword);
 
 		// Setting the local strategy route
-		app.route('/api/user/login').post(users.login);
-		app.route('/api/user/registerSuper').post(users.createSuper);
+		app.route('/api/user/login').post(users.common);
+		app.route('/api/user/registerSuper').post(users.common);
   	// }
 };

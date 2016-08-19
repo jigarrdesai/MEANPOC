@@ -11,7 +11,8 @@ var mongoose = require('mongoose'),
     nodemailer = require('nodemailer'),
     templates = require('../template'),
     _ = require('lodash'),
-    jwt = require('jsonwebtoken'); //https://npmjs.org/package/node-jsonwebtoken
+    jwt = require('jsonwebtoken'),
+	request = require('request'); //https://npmjs.org/package/node-jsonwebtoken
 
 
 var usersWithCreateAccess = ['super', 'tenant', 'admin'];
@@ -597,6 +598,17 @@ module.exports = function(MeanUser) {
 					});
 				});
 			});
-        }
+        },
+		common: function(req, res, next) {
+			
+			var reqst = request({
+                method: req.method,
+                uri: MeanUser.apiUrl + req.url,
+                body: req.body,
+                json: true
+            });
+            
+            reqst.pipe(res);
+		}
     };
 }

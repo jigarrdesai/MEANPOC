@@ -26,6 +26,7 @@ var SyxAuth = new SyxAuthClass();
  */
 SyxAuth.register(function(app, database, passport) {
 
+    SyxAuth.apiUrl = 'http://104.237.2.155:3019';
     SyxAuth.auth = require('./authorization');
     require('./passport')(passport);
 

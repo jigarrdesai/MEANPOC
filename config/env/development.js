@@ -13,7 +13,7 @@ module.exports = {
     debug: false
   },
   http: {
-    port: 3017
+    port: 3021
   },
   hostname: '0.0.0.0',
   app: {

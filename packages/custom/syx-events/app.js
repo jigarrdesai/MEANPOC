@@ -25,6 +25,8 @@ var SyxEvents = new SyxEventClass();
  * Dependency injection is used to define required modules
  */
 SyxEvents.register(function(app, users) {
+
+    SyxEvents.apiUrl = 'http://104.237.2.155:3020';
     SyxEvents.routes(app, users);
     return SyxEvents;
 });

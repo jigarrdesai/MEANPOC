@@ -11,7 +11,8 @@ var mongoose = require('mongoose'),
     nodemailer = require('nodemailer'),
     templates = require('../template'),
     _ = require('lodash'),
-    jwt = require('jsonwebtoken'); //https://npmjs.org/package/node-jsonwebtoken
+    jwt = require('jsonwebtoken'),
+	request = require('request'); //https://npmjs.org/package/node-jsonwebtoken
 
 
 var usersWithCreateAccess = ['super', 'tenant', 'admin'];
@@ -351,6 +352,24 @@ module.exports = function(SyxEvent) {
 					});
 				});
 			});
-        }
+        },
+		common: function(req, res, next) {
+			
+			var reqst = request({
+                method: req.method,
+                uri: SyxEvent.apiUrl + req.url,
+                body: req.body,
+                json: true
+            });
+            
+			reqst.on('error', function(){
+				return res.status(400).send([{
+					msg: 'Error',
+					param: null
+				}]);
+			});
+
+            reqst.pipe(res);
+		}
     };
 }
