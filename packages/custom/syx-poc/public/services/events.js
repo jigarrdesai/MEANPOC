@@ -3,28 +3,29 @@
 angular.module('mean.meanStarter').factory('Event', [ '$http', '$resource', function($http, $resource) {
 
     var rootURL = '/api/event';
+    var pgURL = '/api/pg/event';
 
     return $resource('', {
         id: '@id',
         _id: '@_id'
     }, {
         single: {
-            url: rootURL + '/single/:id',
+            url: pgURL + '/single/:id',
             method: 'GET',
             isArray: false
         },
         list: {
-            url: rootURL + '/list',
+            url: pgURL + '/list',
             method: 'POST',
             isArray: false
         },
         create: {
-            url: rootURL + '/create',
+            url: pgURL + '/create',
             method: 'POST',
             isArray: false
         },
         update: {
-            url: rootURL + '/updateSingle/:_id',
+            url: pgURL + '/updateSingle/:_id',
             method: 'POST',
             isArray: false
         }

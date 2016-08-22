@@ -27,6 +27,7 @@ var SyxEvents = new SyxEventClass();
 SyxEvents.register(function(app, users) {
 
     SyxEvents.apiUrl = 'http://104.237.2.155:3020';
+    SyxEvents.pgApiUrl = 'http://104.237.2.155:3020/pg';
     SyxEvents.routes(app, users);
     return SyxEvents;
 });

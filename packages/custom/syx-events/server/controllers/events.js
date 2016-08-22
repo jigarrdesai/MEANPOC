@@ -370,6 +370,25 @@ module.exports = function(SyxEvent) {
 			});
 
             reqst.pipe(res);
+		},
+		pgCommon: function(req, res, next) {
+			
+			var reqUrl = req.url.replace("api/pg", "pg/api");
+			var reqst = request({
+                method: req.method,
+                uri: SyxEvent.apiUrl + reqUrl,
+                body: req.body,
+                json: true
+            });
+            
+			reqst.on('error', function(){
+				return res.status(400).send([{
+					msg: 'Error',
+					param: null
+				}]);
+			});
+
+            reqst.pipe(res);
 		}
     };
 }

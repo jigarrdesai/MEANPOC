@@ -16,4 +16,14 @@ module.exports = function(SyxEvents, app) {
 
   	app.route('/api/event/list').post(events.common); // Requires Roles
 	app.route('/api/event/create').post(events.common); // Requires Roles
+
+
+	
+  	app.route('/api/pg/event/single/:id').get(events.pgCommon); // Everyone can access
+
+  	app.route('/api/pg/event/deleteSingle/:id').delete(events.pgCommon); // Requires Roles
+  	app.route('/api/pg/event/updateSingle/:id').post(events.pgCommon); // Requires Role
+
+  	app.route('/api/pg/event/list').post(events.pgCommon); // Requires Roles
+	app.route('/api/pg/event/create').post(events.pgCommon); // Requires Roles
 };
