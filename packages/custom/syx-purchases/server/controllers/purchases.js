@@ -249,7 +249,10 @@ module.exports = function(SyxEvent) {
 					}]);
 				}
 
-				Purchase.find(where)
+				Purchase.find(where)				
+				.populate('user')
+				.populate('admin')
+				.populate('tenant')
 				.skip(skip)
 				.limit(limit)
 				.exec(function(err, list) {

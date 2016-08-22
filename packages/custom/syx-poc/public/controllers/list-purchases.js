@@ -1,9 +1,9 @@
 (function() {
   	'use strict';
 
-  	angular.module('mean.meanStarter').controller('POCEventsCtrl', ['$scope', '$rootScope', '$stateParams', '$localStorage', 'Event', function($scope, $rootScope, $stateParams, $localStorage, Event) {
+  	angular.module('mean.meanStarter').controller('POCPurchasesCtrl', ['$scope', '$rootScope', '$localStorage', 'Purchase', function($scope, $rootScope, $localStorage, Purchase) {
 		
-		$scope.type = 'Event';
+		$scope.type = 'Purchase';
 		$scope.totalItems = 0;
 		$scope.fromItems = 0;
 		$scope.toItems = 0;
@@ -11,11 +11,6 @@
 		$scope.itemsPerPage = 10;
 		$scope.currentPage = 1;
 		$scope.fetchingData = false;
-		$scope.errorMessage = null;
-
-		if($stateParams.errorMessage) {
-			$scope.errorMessage = angular.copy($stateParams.errorMessage);
-		}
 
 		var initItems = function() {
 
@@ -30,7 +25,7 @@
 
 			$scope.fetchingData = true;
 
-			Event.list(request, function(data) {
+			Purchase.list(request, function(data) {
 				
 				$scope.fetchingData = false;
 

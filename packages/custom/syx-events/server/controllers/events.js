@@ -40,7 +40,7 @@ module.exports = function(SyxEvent) {
 
 			var current = req.body.current;
 
-			if(!current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current._id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -58,10 +58,10 @@ module.exports = function(SyxEvent) {
 			req.assert('price', 'Enter valid amount').notEmpty();
 			
 			if(current.type == 'admin') {
-				event.admin = current.id;
+				event.admin = current._id;
 				event.tenant = current.tenant._id;
 			} else if(current.type == 'tenant') {
-				event.tenant = current.id;
+				event.tenant = current._id;
 
 				req.assert('admin', 'Select Proper admin').notEmpty();
 			} else {
@@ -154,7 +154,7 @@ module.exports = function(SyxEvent) {
 
 			var current = req.body.current;
 
-			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current._id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -207,10 +207,10 @@ module.exports = function(SyxEvent) {
 				}
 
 				if(current.type == 'admin') {
-					event.admin = current.id;
+					event.admin = current._id;
 					event.tenant = current.tenant._id;
 				} else if(current.type == 'tenant') {
-					event.tenant = current.id;
+					event.tenant = current._id;
 				}
 
 				event.name = req.body.name;
@@ -261,7 +261,7 @@ module.exports = function(SyxEvent) {
 		deleteSingle: function(req, res, next) {
 			var current = req.body.current;
 
-			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current._id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -306,7 +306,7 @@ module.exports = function(SyxEvent) {
             
 			var current = req.body.current;
 
-			if(!current || !current.id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
+			if(!current || !current._id || !current.type || usersWithCreateAccess.indexOf(current.type) < 0) {
 				res.status(400).json({
 					msg: 'Uauthorized Access',
 					param: null
@@ -319,10 +319,10 @@ module.exports = function(SyxEvent) {
 			var where = {};
 
 			if(current.type == 'admin') {
-				where.admin = current.id;
+				where.admin = current._id;
 				where.tenant = current.tenant._id;
 			} else if(current.type == 'tenant') {
-				where.tenant = current.tenant._id;
+				where.tenant = current._id;
 			}
 
 			Event.count(where, function(err, count) {
@@ -381,7 +381,7 @@ module.exports = function(SyxEvent) {
                 json: true
             });
             
-			reqst.on('error', function(){
+			reqst.on('error', function(err){
 				return res.status(400).send([{
 					msg: 'Error',
 					param: null

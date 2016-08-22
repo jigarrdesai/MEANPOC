@@ -31,9 +31,10 @@ var PurchaseSchema = new Schema({
     ref: 'User'
   },
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: false,
-    default: null
+    default: null,
+    ref: 'User'
   },
   event: {
     type: String,

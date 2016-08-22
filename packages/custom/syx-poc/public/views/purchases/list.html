@@ -1,29 +1,24 @@
 <h2>{{type}}</h2>
-<div class="alert alert-danger" ng-show="errorMessage">{{errorMessage}}</div>
 <div class="bs-example" data-example-id="hoverable-table">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Event Name</th>
-                <th>Venue</th>
-                <th>Price</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Action</th>
+                <th>User</th>
+                <th>User Email</th>
+                <th>Event</th>
+                <th>Transaction Date/Time</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in items">
                 <th scope="row">{{$index + 1}}</th>
-                <td>{{item.name}}</td>
-                <td>{{item.venue}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.start | date: 'medium'}}</td>
-                <td>{{item.end | date: 'medium'}}</td>
+                <td>{{item.user.name}}</td>
+                <td>{{item.user.email}}</td>
                 <td>
-                    <a ui-sref="edit{{type}}({id: item._id})" data-id="{{item._id}}">Edit</a>
+                    <a ui-sref="editEvent({id: item.event})">Go to event</a>
                 </td>
+                <td>{{item.date | date: 'medium'}}</td>
             </tr>
         </tbody>
     </table>

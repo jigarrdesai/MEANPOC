@@ -7,6 +7,9 @@ angular.module('mean.meanStarter').config(['$meanStateProvider', function($meanS
 	$meanStateProvider
 		.state('events', {
 			url: '/events',
+			params: {
+				errorMessage: null
+			},
 			templateUrl: 'meanStarter/views/events/list.html',
             controller: 'POCEventsCtrl'
 		})

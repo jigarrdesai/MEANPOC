@@ -36,11 +36,17 @@
                             <li><a href="#" ui-sref="createUser">Create User</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown" uib-dropdown ng-if="$storage.current.type == 'admin'">
+                    <li class="dropdown" uib-dropdown ng-if="$storage.current.type == 'tenant' || $storage.current.type == 'admin'">
                         <a href="#" uib-dropdown-toggle class="dropdown-toggle">Events</a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li><a href="#" ui-sref="events">List</a></li>
                             <li><a href="#" ui-sref="createEvent">Create Event</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" uib-dropdown>
+                        <a href="#" uib-dropdown-toggle class="dropdown-toggle">Purchase History</a>
+                        <ul class="dropdown-menu" uib-dropdown-menu>
+                            <li><a href="#" ui-sref="purchases">List</a></li>
                         </ul>
                     </li>
                 </ul>

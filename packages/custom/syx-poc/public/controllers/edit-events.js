@@ -1,7 +1,7 @@
 (function() {
   	'use strict';
 
-  	angular.module('mean.meanStarter').controller('POCEditEventCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$localStorage', 'Event', function($scope, $rootScope, $state, $stateParams, $localStorage, Event) {
+  	angular.module('mean.meanStarter').controller('POCEditEventCtrl', ['$scope', '$rootScope', '$state', '$stateParams', '$localStorage', 'Event', 'User', function($scope, $rootScope, $state, $stateParams, $localStorage, Event, User) {
 		
 		$scope.type = 'Event';
 		$scope.event = {};
@@ -25,10 +25,28 @@
 				}, function(data) {
 					$scope.event = data.event;
 				}, function(errList) {
-					$state.go('events');
+					$state.transitionTo('events', {errorMessage: 'That event does not exist'});
 				});
 			} else {
-				$state.go('events');
+				$state.transitionTo('events', {errorMessage: 'That event does not exist'});
+			}
+		} else {
+			if($localStorage.current.type == 'tenant') {
+				User.listAdmin({
+					current: $localStorage.current,
+					skip: 0,
+					limit: 100
+				}, function(data) {
+					if(data.count > 0) {
+						$scope.admins = data.list;
+					} else {
+						$scope.errorMessage = 'Can not create Event, Please Create Admin first.';
+					}
+				}, function() {
+					$scope.errorMessage = 'Can not create Event, Please reload the page.';
+				});
+			} else if($localStorage.current.type == 'admin') {
+				$scope.event.tenant = $localStorage.current._id;
 			}
 		}
 
