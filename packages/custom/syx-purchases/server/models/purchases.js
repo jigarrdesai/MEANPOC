@@ -1,0 +1,60 @@
+
+/**
+ * Module dependencies.
+ */
+var mongoose  = require('mongoose'),
+  Schema    = mongoose.Schema,
+  _   = require('lodash');
+
+/**
+ * Getter
+ */
+var escapeProperty = function(value) {
+  return _.escape(value);
+};
+
+/**
+ * Event Schema
+ */
+
+var PurchaseSchema = new Schema({
+  tenant: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    default: null,
+    ref: 'User'
+  },
+  admin: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    default: null,
+    ref: 'User'
+  },
+  user: {
+    type: String,
+    required: false,
+    default: null
+  },
+  event: {
+    type: String,
+    required: false,
+    default: null
+  },
+  date: {
+    type: Date,
+    required: true,
+    default: Date.now
+  }
+});
+
+/**
+ * Hide security sensitive fields
+ *
+ * @returns {*|Array|Binary|Object}
+ */
+PurchaseSchema.methods.toJSON = function() {
+  var obj = this.toObject();
+  return obj;
+};
+
+module.exports = mongoose.model('Purchase', PurchaseSchema);

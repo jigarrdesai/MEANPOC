@@ -18,7 +18,8 @@ angular.module('mean.meanStarter').config(['$meanStateProvider', function($meanS
 		.state('editEvent', {
 			url: '/edit-event/:id',
 			params: {
-				id: null
+				id: null,
+				successMessage: null
 			},
 			templateUrl: 'meanStarter/views/events/edit.html',
 			controller: 'POCEditEventCtrl'

@@ -14,6 +14,11 @@
 
 		if($state.is('editEvent')) {
 			$scope.editMode = true;
+			
+			if($stateParams.successMessage) {
+				$scope.successMessage = angular.copy($stateParams.successMessage);
+			}
+
 			if($stateParams.id) {
 				Event.single({
 					id: $stateParams.id
@@ -42,7 +47,7 @@
 				Event[operation](request, function(data) {
 
 					$scope.successMessage = 'Event Saved';
-					$state.transitionTo('editEvent', {id: data.id});
+					$state.transitionTo('editEvent', {id: data.id, successMessage: 'Event successfully created.'});
 				}, function(errList, a, b) {
 
 					$scope.errorMessage = errList.data.msg || errList.data[0].msg;

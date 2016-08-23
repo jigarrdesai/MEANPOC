@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "Rklick"
+  },
+  "bugs": {
+    "url": "https://github.com/rjVapes/meanio-users/issues"
+  },
+  "dependencies": {},
+  "description": "Purchases package",
+  "devDependencies": {},
+  "engines": {
+    "node": "4.2.x",
+    "npm": "3.x"
+  },
+  "license": "MIT",
+  "mean": "0.6.x",
+  "name": "syx-purchases",
+  "optionalDependencies": {},
+  "readmeFilename": "README.md",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "version": "0.0.1"
+}
