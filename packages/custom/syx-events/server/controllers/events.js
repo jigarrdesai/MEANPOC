@@ -53,9 +53,19 @@ module.exports = function(SyxEvent) {
 		pgCommon: function(req, res, next) {
 			
 			var reqUrl = req.url.replace("api/pg", "pg/api");
-			var reqst = request({
+			// var reqst = request({
+            //     method: req.method,
+            //     uri: SyxEvent.apiUrl + reqUrl,
+            //     body: req.body,
+            //     json: true
+            // });
+
+            var reqst = request({
                 method: req.method,
-                uri: SyxEvent.apiUrl + reqUrl,
+				headers: {
+					header: 'Host:' + SyxEvent.eventHost
+				},
+                uri: SyxEvent.proxyUrl + reqUrl,
                 body: req.body,
                 json: true
             });
