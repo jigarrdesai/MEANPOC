@@ -35,22 +35,22 @@ module.exports = function(MeanUser) {
     return {
 		common: function(req, res, next) {
 			
-			var reqst = request({
-                method: req.method,
-                uri: MeanUser.apiUrl + req.url,
-                body: req.body,
-                json: true
-            });
-
-            // var reqst = request({
+			// var reqst = request({
             //     method: req.method,
-			// 	headers: {
-			// 		header: 'Host:' + MeanUser.userHost
-			// 	},
-            //     uri: MeanUser.proxyUrl + req.url,
+            //     uri: MeanUser.apiUrl + req.url,
             //     body: req.body,
             //     json: true
             // });
+
+            var reqst = request({
+                method: req.method,
+				headers: {
+					header: 'Host:' + MeanUser.userHost
+				},
+                uri: MeanUser.proxyUrl + req.url,
+                body: req.body,
+                json: true
+            });
             
             reqst.pipe(res);
 		}
