@@ -53,7 +53,11 @@
 				User[operation](request, function(data) {
 
 					$scope.successMessage = 'User Saved';
-					$state.transitionTo('editUser', {id: data.id});
+					if(operation == 'update') {
+						$state.transitionTo('editUser', {id: data.id});
+					} else {
+						$state.transitionTo('users');
+					}
 				}, function(errList, a, b) {
 
 					$scope.errorMessage = errList.data.msg || errList.data[0].msg;
