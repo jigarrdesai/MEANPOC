@@ -26,10 +26,10 @@ var SyxEvents = new SyxEventClass();
  */
 SyxEvents.register(function(app, users) {
 
-    SyxEvents.apiUrl = 'http://104.237.2.155:3020';
-    SyxEvents.eventHost = '104.237.2.155:3020';
-    SyxEvents.pgApiUrl = 'http://104.237.2.155:3020/pg';
-    SyxEvents.proxyUrl = 'http://37.247.116.155:8000';
+    SyxEvents.apiUrl = 'http://37.247.116.155:8000/pg/api';
+   // SyxEvents.eventHost = '104.237.2.155:3020';
+   // SyxEvents.pgApiUrl = 'http://104.237.2.155:3020/pg';
+  //  SyxEvents.proxyUrl = 'http://37.247.116.155:8000';
 
     SyxEvents.routes(app, users);
     return SyxEvents;
