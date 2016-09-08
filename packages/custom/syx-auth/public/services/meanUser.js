@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$location', '$stateParams', '$cookies', '$q', '$timeout', 'Global',
-  function($rootScope, $http, $location, $stateParams, $cookies, $q, $timeout, Global) {
+angular.module('mean.users').factory('MeanUser', ['$rootScope', '$http', '$location', '$stateParams', '$cookies', '$q', '$timeout', 'Global',
+  function ($rootScope, $http, $location, $stateParams, $cookies, $q, $timeout, Global) {
 
     var self;
 
@@ -14,8 +14,8 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
         .replace(/>/g, '&gt;');
     }
 
-    function b64_to_utf8( str ) {
-      return decodeURIComponent(escape(window.atob( str )));
+    function b64_to_utf8(str) {
+      return decodeURIComponent(escape(window.atob(str)));
     }
 
     /*function url_base64_decode(str) {
@@ -35,7 +35,7 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
     }*/
 
-    function MeanUserKlass(){
+    function MeanUserKlass() {
       this.name = 'users';
       this.user = {};
       this.acl = {};
@@ -50,7 +50,7 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       self = this;
     }
 
-    MeanUserKlass.prototype.onIdentity = function(response) {
+    MeanUserKlass.prototype.onIdentity = function (response) {
       if (!response) return;
       var encodedUser, user, destination;
       if (angular.isDefined(response.token)) {
@@ -67,7 +67,7 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       var userObj = this.user;
       var self = this;
       // Add circles info to user
-      $http.get('/api/circles/mine').success(function(acl) {
+      $http.get('/api/circles/mine').success(function (acl) {
         self.acl = acl;
         if (destination) {
           $location.path(destination);
@@ -91,17 +91,18 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
 
     MeanUserKlass.prototype.login = function (user) {
       // this is an ugly hack due to mean-admin needs
+      console.log("Test1");
       var destination = $location.path().indexOf('/login') === -1 ? $location.absUrl() : false;
       $http.post('/api/login', {
-          email: user.email,
-          password: user.password,
-          redirect: destination
-        })
+        email: user.email,
+        password: user.password,
+        redirect: destination
+      })
         .success(this.onIdentity.bind(this))
         .error(this.onIdFail.bind(this));
     };
 
-    MeanUserKlass.prototype.register = function(user) {
+    MeanUserKlass.prototype.register = function (user) {
       $http.post('/api/register', {
         email: user.email,
         password: user.password,
@@ -113,42 +114,42 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
         .error(this.onIdFail.bind(this));
     };
 
-    MeanUserKlass.prototype.resetpassword = function(user) {
-        $http.post('/api/reset/' + $stateParams.tokenId, {
-          password: user.password,
-          confirmPassword: user.confirmPassword
-        })
-          .success(this.onIdentity.bind(this))
-          .error(this.onIdFail.bind(this));
-      };
+    MeanUserKlass.prototype.resetpassword = function (user) {
+      $http.post('/api/reset/' + $stateParams.tokenId, {
+        password: user.password,
+        confirmPassword: user.confirmPassword
+      })
+        .success(this.onIdentity.bind(this))
+        .error(this.onIdFail.bind(this));
+    };
 
-    MeanUserKlass.prototype.forgotpassword = function(user) {
-        $http.post('/api/forgot-password', {
-          text: user.email
+    MeanUserKlass.prototype.forgotpassword = function (user) {
+      $http.post('/api/forgot-password', {
+        text: user.email
+      })
+        .success(function (response) {
+          $rootScope.$emit('forgotmailsent', response);
         })
-          .success(function(response) {
-            $rootScope.$emit('forgotmailsent', response);
-          })
-          .error(this.onIdFail.bind(this));
-      };
+        .error(this.onIdFail.bind(this));
+    };
 
-    MeanUserKlass.prototype.logout = function(){
+    MeanUserKlass.prototype.logout = function () {
       this.user = {};
       this.loggedin = false;
       this.isAdmin = false;
 
-      $http.get('/api/logout').success(function(data) {
+      $http.get('/api/logout').success(function (data) {
         localStorage.removeItem('JWT');
         $rootScope.$emit('logout');
         Global.authenticate();
       });
     };
 
-    MeanUserKlass.prototype.checkLoggedin = function() {
-     var deferred = $q.defer();
+    MeanUserKlass.prototype.checkLoggedin = function () {
+      var deferred = $q.defer();
 
       // Make an AJAX call to check if the user is logged in
-      $http.get('/api/loggedin').success(function(user) {
+      $http.get('/api/loggedin').success(function (user) {
         // Authenticated
         if (user !== '0') $timeout(deferred.resolve);
 
@@ -163,13 +164,13 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       return deferred.promise;
     };
 
-    MeanUserKlass.prototype.checkLoggedOut = function() {
-       // Check if the user is not connected
+    MeanUserKlass.prototype.checkLoggedOut = function () {
+      // Check if the user is not connected
       // Initialize a new promise
       var deferred = $q.defer();
 
       // Make an AJAX call to check if the user is logged in
-      $http.get('/api/loggedin').success(function(user) {
+      $http.get('/api/loggedin').success(function (user) {
         // Authenticated
         if (user !== '0') {
           $timeout(deferred.reject);
@@ -182,11 +183,11 @@ angular.module('mean.users').factory('MeanUser', [ '$rootScope', '$http', '$loca
       return deferred.promise;
     };
 
-    MeanUserKlass.prototype.checkAdmin = function() {
-     var deferred = $q.defer();
+    MeanUserKlass.prototype.checkAdmin = function () {
+      var deferred = $q.defer();
 
       // Make an AJAX call to check if the user is logged in
-      $http.get('/api/loggedin').success(function(user) {
+      $http.get('/api/loggedin').success(function (user) {
         // Authenticated
         if (user !== '0' && user.roles.indexOf('admin') !== -1) $timeout(deferred.resolve);
 

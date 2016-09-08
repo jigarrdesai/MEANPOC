@@ -26,7 +26,7 @@ var SyxAuth = new SyxAuthClass();
  */
 SyxAuth.register(function(app, database, passport) {
 
-    SyxAuth.apiUrl = 'http://37.247.116.155:8000/api';
+    SyxAuth.apiUrl = 'http://37.247.116.155:8000';
    // SyxAuth.userHost = '104.237.2.155:3019';
     //SyxAuth.proxyUrl = 'http://37.247.116.155:8000';
     SyxAuth.auth = require('./authorization');
