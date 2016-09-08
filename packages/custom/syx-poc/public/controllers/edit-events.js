@@ -65,7 +65,12 @@
 				Event[operation](request, function(data) {
 
 					$scope.successMessage = 'Event Saved';
-					$state.transitionTo('editEvent', {id: data.id, successMessage: 'Event successfully created.'});
+					
+					if(operation == 'update') {
+						$state.transitionTo('editEvent', {id: data.id, successMessage: 'Event successfully created.'});
+					} else {
+						$state.transitionTo('events');
+					}					
 				}, function(errList, a, b) {
 
 					$scope.errorMessage = errList.data.msg || errList.data[0].msg;
